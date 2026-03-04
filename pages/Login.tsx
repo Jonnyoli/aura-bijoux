@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     const success = await login(email, password);
 
     if (success) {
-      if (email === 'admin@gmail.com') {
+      if (email === 'sonia@aurabijoux.pt') {
         navigate('/admin');
       } else {
         navigate('/profile');

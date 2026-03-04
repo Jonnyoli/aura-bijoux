@@ -71,7 +71,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('/api/products');
+        const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/products`);
         if (res.ok) {
           const data = await res.json();
           // Map MongoDB _id back to id and provide fallbacks for UI fields missing in DB
@@ -240,7 +240,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const login = async (email: string, password?: string) => {
     try {
-      const res = await fetch('/api/users/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/users/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password: password || 'password123' })
@@ -295,7 +295,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const addUserAddress = async (addressData: Omit<import('./types').Address, 'id'>) => {
     if (!user?.token) return false;
     try {
-      const res = await fetch('/api/users/profile/address', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/users/profile/address`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -321,7 +321,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const deleteUserAddress = async (id: string) => {
     if (!user?.token) return false;
     try {
-      const res = await fetch(`/api/users/profile/address/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/users/profile/address/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${user.token}` }
       });

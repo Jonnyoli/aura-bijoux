@@ -126,7 +126,7 @@ const Checkout: React.FC = () => {
       };
 
       console.log('2. Requesting session from Express backend...');
-      const res = await fetch('/api/checkout/create-session', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/checkout/create-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
